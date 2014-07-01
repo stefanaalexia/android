@@ -17,6 +17,6 @@ public class ApplicationConstants {
 	 */
 
 	public static final String LOGIN = "login/";
-	public static final String GET_PROJECTS = "getProjects";
+	public static final String GET_PROJECTS = "projects/";
 
 }

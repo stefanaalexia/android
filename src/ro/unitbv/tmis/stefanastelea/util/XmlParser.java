@@ -1,6 +1,8 @@
 package ro.unitbv.tmis.stefanastelea.util;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -58,36 +60,40 @@ public class XmlParser {
 		return result;
 	}
 
-	public Project parseXMLProject(XmlPullParser parser)
+	public List<Project> parseXMLProject(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
 
 		int eventType = parser.getEventType();
-		Project result = new Project();
+		List<Project> result = new ArrayList<Project>();
 
 		while (eventType != XmlPullParser.END_DOCUMENT) {
 			String name = null;
-
+			Project pr = new Project();
 			switch (eventType) {
 			case XmlPullParser.START_TAG:
+
 				name = parser.getName();
 				if (name.equals("id")) {
-					result.setId(Integer.parseInt(parser.nextText()));
+					pr.setId(Integer.parseInt(parser.nextText()));
 				} else if (name.equals("Error")) {
 					System.out.println("Web API Error!");
 				} else if (name.equals("name")) {
-					result.setName(parser.nextText());
+					pr.setName(parser.nextText());
 				} else if (name.equals("description")) {
-					result.setDescription(parser.nextText());
+					pr.setDescription(parser.nextText());
 				} else if (name.equals("status")) {
-					result.setStatus(Integer.parseInt(parser.nextText()));
+					pr.setStatus(Integer.parseInt(parser.nextText()));
 				}
 
 				break;
 
-			case XmlPullParser.END_TAG:
-				break;
-			} // end switch
+			case XmlPullParser.END_TAG: {
 
+				break;
+			}
+			} // end switch
+			result.add(pr);
+			pr = new Project();
 			eventType = parser.next();
 		} // end while
 
