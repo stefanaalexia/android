@@ -2,6 +2,7 @@ package ro.unitbv.tmis.stefanastelea.activities;
 
 import ro.unitbv.tmis.stefanastelea.R;
 import ro.unitbv.tmis.stefanastelea.adapters.TabsPagerAdapter;
+import ro.unitbv.tmis.stefanastelea.datamodel.User;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
@@ -18,6 +19,11 @@ public class DisplayHomeActivity extends FragmentActivity implements
 	private ActionBar actionBar;
 	// Tab titles
 	private String[] tabs = { "My Account", "Propose Project", "All Projects" };
+	private User user;
+
+	public User getUser() {
+		return user;
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +33,8 @@ public class DisplayHomeActivity extends FragmentActivity implements
 		getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 
 		setContentView(R.layout.main_tab);
+
+		user = (User) getIntent().getSerializableExtra("User");
 
 		// Initilization
 		viewPager = (ViewPager) findViewById(R.id.pager);

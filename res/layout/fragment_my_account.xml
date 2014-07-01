@@ -1,16 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/dark_white" >
-     
-    <TextView android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Design Top Rated Screen"
-        android:textSize="20dp"
-        android:layout_centerInParent="true"/>
-     
- 
-</RelativeLayout>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/dark_white"
+    android:stretchColumns="1"
+    android:padding="15dp" >
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="1"
+            android:padding="3dip"
+            android:text="@string/id"
+            android:textColor="@color/blue1"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textview_myaccount_id"
+            android:gravity="right"
+            android:padding="3dip"
+            android:text="@string/none"
+            android:textSize="24sp" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="1"
+            android:padding="3dip"
+            android:text="@string/firstname"
+            android:textColor="@color/blue1"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textview_myaccount_firstname"
+            android:gravity="right"
+            android:padding="3dip"
+            android:text="@string/none"
+            android:textSize="24sp" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="1"
+            android:padding="3dip"
+            android:text="@string/lastname"
+            android:textColor="@color/blue1"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textview_myaccount_lastname"
+            android:gravity="right"
+            android:padding="3dip"
+            android:text="@string/none"
+            android:textSize="24sp" />
+    </TableRow>
+
+    <View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="1"
+            android:padding="3dip"
+            android:text="@string/email"
+            android:textColor="@color/blue1"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textview_myaccount_email"
+            android:gravity="right"
+            android:padding="3dip"
+            android:text="@string/none"
+            android:textSize="24sp" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="1"
+            android:padding="3dip"
+            android:text="@string/username"
+            android:textColor="@color/blue1"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textview_myaccount_username"
+            android:gravity="right"
+            android:padding="3dip"
+            android:text="@string/none"
+            android:textSize="24sp" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="1"
+            android:padding="3dip"
+            android:text="@string/usertype"
+            android:textColor="@color/blue1"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textview_myaccount_usertype"
+            android:gravity="right"
+            android:padding="3dip"
+            android:text="@string/none"
+            android:textSize="24sp" />
+    </TableRow>
+
+    <View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+
+</TableLayout>

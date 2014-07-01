@@ -1,6 +1,8 @@
 package ro.unitbv.tmis.stefanastelea.datamodel;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
 	private int id;
 

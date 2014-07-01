@@ -32,6 +32,7 @@ public class MainActivity extends Activity {
 	private EditText passwordEditText = null;
 	private Button login;
 	private XmlParser xmlParser;
+	private User user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +93,7 @@ public class MainActivity extends Activity {
 		protected String doInBackground(String... params) {
 			String urlString = params[0];
 			String resultToDisplay;
-			User result = null;
+			user = null;
 			InputStream in = null;
 
 			// HTTP Get
@@ -139,7 +140,7 @@ public class MainActivity extends Activity {
 				parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES,
 						false);
 				parser.setInput(in, null);
-				result = xmlParser.parseXML(parser);
+				user = xmlParser.parseXML(parser);
 			} catch (XmlPullParserException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -148,8 +149,8 @@ public class MainActivity extends Activity {
 
 			// Simple logic to determine if the email is dangerous, invalid, or
 			// valid
-			if (result != null) {
-				if (result.getFirstName().equals("Stefana")) {
+			if (user != null) {
+				if (user.getFirstName().equals("Stefana")) {
 					resultToDisplay = "Stefana logged in";
 				} else {
 					resultToDisplay = "Someone else logged in";
@@ -162,10 +163,20 @@ public class MainActivity extends Activity {
 		}
 
 		protected void onPostExecute(String result) {
-			Intent intent = new Intent(MainActivity.this,
-					DisplayHomeActivity.class);
-			intent.putExtra("result", result);
-			startActivity(intent);
+			if (result.equals("Exception Occured")) {
+				findViewById(R.id.textViewWrongCredentials).setVisibility(
+						View.VISIBLE);
+				Toast.makeText(getApplicationContext(), "Wrong Credentials",
+						Toast.LENGTH_SHORT).show();
+			} else {
+				findViewById(R.id.textViewWrongCredentials).setVisibility(
+						View.INVISIBLE);
+				Intent intent = new Intent(MainActivity.this,
+						DisplayHomeActivity.class);
+				intent.putExtra("result", result);
+				intent.putExtra("User", user);
+				startActivity(intent);
+			}
 		}
 
 	} // end CallAPI

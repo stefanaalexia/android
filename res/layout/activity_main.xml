@@ -123,6 +123,21 @@
                 android:textSize="20sp" />
         </LinearLayout>
         <!-- Login Form Ends -->
+
+        <TextView
+            android:id="@+id/textViewWrongCredentials"
+            android:layout_width="fill_parent"
+            android:background="@color/red"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/footer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="13dp"
+            android:text="@string/wrong_login" 
+            android:gravity="center"
+            android:padding="8dp"
+            android:visibility="invisible"/>
+
     </RelativeLayout>
 
 </ScrollView>
