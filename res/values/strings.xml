@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Final Year Project Assesment</string>
+    <string name="copyright"> &#169; Stefana - Alexia Stelea</string>
+
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="none"></string>
+
+</resources>
