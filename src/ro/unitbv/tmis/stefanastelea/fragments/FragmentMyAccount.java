@@ -1,7 +1,7 @@
 package ro.unitbv.tmis.stefanastelea.fragments;
 
 import ro.unitbv.tmis.stefanastelea.R;
-import ro.unitbv.tmis.stefanastelea.activities.DisplayHomeActivity;
+import ro.unitbv.tmis.stefanastelea.activities.UserActivity;
 import ro.unitbv.tmis.stefanastelea.datamodel.User;
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class FragmentMyAccount extends Fragment {
 
-	private DisplayHomeActivity displayActivity;
+	private UserActivity displayActivity;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +43,6 @@ public class FragmentMyAccount extends Fragment {
 	@Override
 	public void onAttach(Activity myActivity) {
 		super.onAttach(myActivity);
-		this.displayActivity = (DisplayHomeActivity) myActivity;
+		this.displayActivity = (UserActivity) myActivity;
 	}
 }

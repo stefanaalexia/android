@@ -3,7 +3,6 @@
 
     <string name="app_name">Final Year Project Assesment</string>
     <string name="copyright"> &#169; Stefana - Alexia Stelea</string>
-
     <string name="login">Login</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -14,5 +13,8 @@
     <string name="username">Username</string>
     <string name="usertype">User type</string>
     <string name="wrong_login">Wrong credentials! Please try again.</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="status">Status</string>
 
 </resources>

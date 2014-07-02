@@ -8,7 +8,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.List;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -16,8 +15,8 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import ro.unitbv.tmis.stefanastelea.R;
 import ro.unitbv.tmis.stefanastelea.activities.UserActivity;
-import ro.unitbv.tmis.stefanastelea.adapters.MySimpleArrayAdapter;
 import ro.unitbv.tmis.stefanastelea.datamodel.Project;
+import ro.unitbv.tmis.stefanastelea.datamodel.User;
 import ro.unitbv.tmis.stefanastelea.util.ApplicationConstants;
 import ro.unitbv.tmis.stefanastelea.util.XmlParser;
 import android.app.Activity;
@@ -27,39 +26,56 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class FragmentAllProjects extends Fragment {
+public class FragmentMyProject extends Fragment {
 
 	private UserActivity displayActivity;
-	View rootView;
-	private List<Project> projects;
+	private View rootView;
 	private XmlParser xmlParser;
 	String urlParameters = "";
+	Project project;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		rootView = inflater.inflate(R.layout.fragment_all_projects, container,
+		rootView = inflater.inflate(R.layout.fragment_my_project, container,
 				false);
 		xmlParser = new XmlParser();
-		getAllProjects();
+		User user = displayActivity.getUser();
+		getMyProject(user.getId());
 
 		return rootView;
 	}
 
-	public void getAllProjects() {
+	public void updateViews() {
+		if (project != null) {
+			((TextView) rootView.findViewById(R.id.textview_project_name))
+					.setText(project.getName());
+			((TextView) rootView
+					.findViewById(R.id.textview_project_description))
+					.setText(project.getDescription());
+			((TextView) rootView.findViewById(R.id.textview_project_status))
+					.setText(project.getStatus() + "");
+
+			Toast.makeText(getActivity(), "Succedded getting my project",
+					Toast.LENGTH_SHORT).show();
+		}
+
+	}
+
+	public void getMyProject(int id) {
 
 		try {
-			urlParameters = "id=" + URLEncoder.encode("3", "UTF-8");
+			urlParameters = "id=" + URLEncoder.encode(id + "", "UTF-8");
 
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		String urlString = ApplicationConstants.apiURL
-				+ ApplicationConstants.GET_ALL_PROJECTS;
+				+ ApplicationConstants.GET_MY_PROJECT;
 
 		new CallAPI().execute(urlString);
 
@@ -71,7 +87,7 @@ public class FragmentAllProjects extends Fragment {
 		protected String doInBackground(String... params) {
 			String urlString = params[0];
 			String resultToDisplay;
-			projects = null;
+			project = null;
 			InputStream in = null;
 
 			// HTTP Get
@@ -118,7 +134,7 @@ public class FragmentAllProjects extends Fragment {
 				parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES,
 						false);
 				parser.setInput(in, null);
-				projects = xmlParser.parseXMLListProjects(parser);
+				project = xmlParser.parseXMLProject(parser);
 			} catch (XmlPullParserException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -127,9 +143,9 @@ public class FragmentAllProjects extends Fragment {
 
 			// Simple logic to determine if the email is dangerous, invalid, or
 			// valid
-			if (projects != null) {
+			if (project != null) {
 
-				resultToDisplay = "Some projects here";
+				resultToDisplay = "My project here";
 
 			} else {
 				resultToDisplay = "Exception Occured";
@@ -141,20 +157,15 @@ public class FragmentAllProjects extends Fragment {
 		protected void onPostExecute(String result) {
 			if (result.equals("Exception Occured")) {
 
-				Toast.makeText(getActivity(), "Error getting projects",
+				Toast.makeText(getActivity(), "Error getting my project",
 						Toast.LENGTH_SHORT).show();
 			} else {
-				ListView list = (ListView) rootView
-						.findViewById(R.id.listviewproposed);
-				MySimpleArrayAdapter adapter = new MySimpleArrayAdapter(
-						displayActivity, projects);
-				list.setAdapter(adapter);
-
-				Toast.makeText(getActivity(), "Succedded getting projects",
+				Toast.makeText(getActivity(), "Success getting my project",
 						Toast.LENGTH_SHORT).show();
-
+				updateViews();
 			}
 		}
+
 	} // end CallAPI
 
 	@Override

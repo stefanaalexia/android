@@ -2,7 +2,10 @@ package ro.unitbv.tmis.stefanastelea.activities;
 
 import ro.unitbv.tmis.stefanastelea.R;
 import ro.unitbv.tmis.stefanastelea.adapters.TabsPagerAdapter;
+import ro.unitbv.tmis.stefanastelea.adapters.TabsPagerAdapterAcademic;
+import ro.unitbv.tmis.stefanastelea.adapters.TabsPagerAdapterStudent;
 import ro.unitbv.tmis.stefanastelea.datamodel.User;
+import ro.unitbv.tmis.stefanastelea.util.ApplicationConstants;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
@@ -11,15 +14,22 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Window;
 
-public class DisplayHomeActivity extends FragmentActivity implements
+public class UserActivity extends FragmentActivity implements
 		ActionBar.TabListener {
 
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
 	// Tab titles
-	private String[] tabs = { "My Account", "Propose Project", "All Projects" };
+	private String[] tabs;
+	private String type;
 	private User user;
+
+	public UserActivity(String[] tabs, String user_type) {
+		this.tabs = new String[tabs.length];
+		this.tabs = tabs;
+		this.type = user_type;
+	}
 
 	public User getUser() {
 		return user;
@@ -39,7 +49,11 @@ public class DisplayHomeActivity extends FragmentActivity implements
 		// Initilization
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		actionBar = getActionBar();
-		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+		if (type.equals(ApplicationConstants.STUDENT)) {
+			mAdapter = new TabsPagerAdapterStudent(getSupportFragmentManager());
+		} else if (type.equals(ApplicationConstants.ACADEMIC_STAFF)) {
+			mAdapter = new TabsPagerAdapterAcademic(getSupportFragmentManager());
+		}
 
 		viewPager.setAdapter(mAdapter);
 		actionBar.setHomeButtonEnabled(false);

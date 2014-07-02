@@ -60,15 +60,52 @@ public class XmlParser {
 		return result;
 	}
 
-	public List<Project> parseXMLProject(XmlPullParser parser)
+	public Project parseXMLProject(XmlPullParser parser)
+			throws XmlPullParserException, IOException {
+
+		int eventType = parser.getEventType();
+		Project pr = new Project();
+
+		while (eventType != XmlPullParser.END_DOCUMENT) {
+			String name = null;
+
+			switch (eventType) {
+			case XmlPullParser.START_TAG:
+
+				name = parser.getName();
+				if (name.equals("id")) {
+					pr.setId(Integer.parseInt(parser.nextText()));
+				} else if (name.equals("Error")) {
+					System.out.println("Web API Error!");
+				} else if (name.equals("name")) {
+					pr.setName(parser.nextText());
+				} else if (name.equals("description")) {
+					pr.setDescription(parser.nextText());
+				} else if (name.equals("status")) {
+					pr.setStatus(Integer.parseInt(parser.nextText()));
+				}
+
+				break;
+
+			case XmlPullParser.END_TAG:
+				break;
+			} // end switch
+
+			eventType = parser.next();
+		} // end while
+
+		return pr;
+	}
+
+	public List<Project> parseXMLListProjects(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
 
 		int eventType = parser.getEventType();
 		List<Project> result = new ArrayList<Project>();
-
+		Project pr = new Project();
 		while (eventType != XmlPullParser.END_DOCUMENT) {
 			String name = null;
-			Project pr = new Project();
+
 			switch (eventType) {
 			case XmlPullParser.START_TAG:
 
@@ -88,12 +125,15 @@ public class XmlParser {
 				break;
 
 			case XmlPullParser.END_TAG: {
-
+				name = parser.getName();
+				if (name.equals("projectBean")) {
+					result.add(pr);
+					pr = new Project();
+				}
 				break;
 			}
 			} // end switch
-			result.add(pr);
-			pr = new Project();
+
 			eventType = parser.next();
 		} // end while
 

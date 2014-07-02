@@ -30,8 +30,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class FragmentAllProjects extends Fragment {
-
+public class FragmentProposedProjects extends Fragment {
 	private UserActivity displayActivity;
 	View rootView;
 	private List<Project> projects;
@@ -42,24 +41,24 @@ public class FragmentAllProjects extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		rootView = inflater.inflate(R.layout.fragment_all_projects, container,
-				false);
+		rootView = inflater.inflate(R.layout.fragment_proposed_projects,
+				container, false);
 		xmlParser = new XmlParser();
-		getAllProjects();
+		getProposedProjects();
 
 		return rootView;
 	}
 
-	public void getAllProjects() {
-
+	public void getProposedProjects() {
+		int userId = displayActivity.getUser().getId();
 		try {
-			urlParameters = "id=" + URLEncoder.encode("3", "UTF-8");
+			urlParameters = "id=" + URLEncoder.encode(userId + "", "UTF-8");
 
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		String urlString = ApplicationConstants.apiURL
-				+ ApplicationConstants.GET_ALL_PROJECTS;
+				+ ApplicationConstants.GET_PROPOSED_PROJECTS;
 
 		new CallAPI().execute(urlString);
 
@@ -144,8 +143,7 @@ public class FragmentAllProjects extends Fragment {
 				Toast.makeText(getActivity(), "Error getting projects",
 						Toast.LENGTH_SHORT).show();
 			} else {
-				ListView list = (ListView) rootView
-						.findViewById(R.id.listviewproposed);
+				ListView list = (ListView) rootView.findViewById(R.id.listview);
 				MySimpleArrayAdapter adapter = new MySimpleArrayAdapter(
 						displayActivity, projects);
 				list.setAdapter(adapter);

@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -171,14 +172,26 @@ public class MainActivity extends Activity {
 			} else {
 				findViewById(R.id.textViewWrongCredentials).setVisibility(
 						View.INVISIBLE);
-				Intent intent = new Intent(MainActivity.this,
-						DisplayHomeActivity.class);
-				intent.putExtra("result", result);
-				intent.putExtra("User", user);
-				startActivity(intent);
+				Intent intent = null;
+				Log.i("user type", user.getUserType());
+				if (user.getUserType().equals(
+						ApplicationConstants.ACADEMIC_STAFF)) {
+					intent = new Intent(MainActivity.this,
+							AcademicStaffActivity.class);
+					intent.putExtra("result", result);
+					intent.putExtra("User", user);
+					startActivity(intent);
+				} else if (user.getUserType().equals(
+						ApplicationConstants.STUDENT)) {
+					intent = new Intent(MainActivity.this,
+							StudentActivity.class);
+					intent.putExtra("result", result);
+					intent.putExtra("User", user);
+					startActivity(intent);
+				}
+
 			}
 		}
-
 	} // end CallAPI
 
 }
