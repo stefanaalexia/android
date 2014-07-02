@@ -34,6 +34,7 @@ public class MainActivity extends Activity {
 	private Button login;
 	private XmlParser xmlParser;
 	private User user;
+	String urlParameters = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +49,10 @@ public class MainActivity extends Activity {
 	}
 
 	public void onClick(View view) {
-		login(view);
+		login();
 	}
 
-	String urlParameters = "";
-
-	public void login(View view) {
+	public void login() {
 		if (usernameEditText.getText().toString() != null
 				&& passwordEditText.getText() != null) {
 

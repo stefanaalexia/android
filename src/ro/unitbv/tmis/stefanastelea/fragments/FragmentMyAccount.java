@@ -24,8 +24,8 @@ public class FragmentMyAccount extends Fragment {
 
 		User user = displayActivity.getUser();
 
-		// ((TextView) rootView.findViewById(R.id.textview_myaccount_id))
-		// .setText(user.getId());
+		((TextView) rootView.findViewById(R.id.textview_myaccount_id))
+				.setText(user.getId() + "");
 		((TextView) rootView.findViewById(R.id.textview_myaccount_firstname))
 				.setText(user.getFirstName());
 		((TextView) rootView.findViewById(R.id.textview_myaccount_lastname))

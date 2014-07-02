@@ -1,16 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/dark_white" >
-     
-    <TextView android:layout_width="fill_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Design Games Screen"
-        android:textSize="20dp"
-        android:layout_centerInParent="true"/>
-     
- 
-</RelativeLayout>
+        android:background="@color/dark_white" >
+
+        <LinearLayout
+            android:id="@+id/footer"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignParentBottom="true"
+            android:background="@layout/footer_repeat"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_weight="0.37"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text="@string/copyright"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <!-- Footer Ends -->
+
+
+        <!-- Login Form -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dip" >
+
+            <!-- android:layout_below="@id/header" -->
+
+
+            <!-- Email Label -->
+
+            <TextView
+                android:id="@+id/textViewAddProjectName"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="#372c24" />
+
+            <EditText
+                android:id="@+id/editTextAddProjectName"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dip"
+                android:layout_marginTop="5dip"
+                android:inputType="text"
+                android:singleLine="true" />
+            <!-- Password Label -->
+
+            <TextView
+                android:id="@+id/textViewAddProjectDescription"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:textColor="#372c24" />
+
+            <EditText
+                android:id="@+id/editTextAddProjectDescription"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:inputType="text"
+                android:singleLine="true" />
+            <!-- Login button -->
+
+            <Button
+                android:id="@+id/buttonAddProject"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:background="@color/blue1"
+                android:padding="10dp"
+                android:text="@string/addproject"
+                android:textSize="20sp" />
+        </LinearLayout>
+        <!-- Login Form Ends -->
+
+        <TextView
+            android:id="@+id/textViewWrongData"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/footer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="13dp"
+            android:background="@color/red"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/wrong_login"
+            android:textColor="@color/white"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+</ScrollView>

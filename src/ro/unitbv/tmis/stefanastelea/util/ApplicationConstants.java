@@ -21,5 +21,6 @@ public class ApplicationConstants {
 	public static final String GET_PROPOSED_PROJECTS = "userpr/proposedprojects/";
 	public static final String GET_ALL_PROJECTS = "userpr/allprojects/";
 	public static final String GET_MY_PROJECT = "userpr/myproject/";
+	public static final String ADD_PROJECT = "userpr/addproject/";
 
 }

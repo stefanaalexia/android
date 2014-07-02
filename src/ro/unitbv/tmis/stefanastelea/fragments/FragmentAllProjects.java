@@ -51,9 +51,9 @@ public class FragmentAllProjects extends Fragment {
 	}
 
 	public void getAllProjects() {
-
+		int userId = displayActivity.getUser().getId();
 		try {
-			urlParameters = "id=" + URLEncoder.encode("3", "UTF-8");
+			urlParameters = "id=" + URLEncoder.encode(userId + "", "UTF-8");
 
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
